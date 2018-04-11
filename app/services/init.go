@@ -10,6 +10,7 @@ const strLen = 5
 func BuildRandomString() string {
 	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+	// why 42? because.
 	rand.Seed(time.Now().UnixNano() + 42)
 
 	b := make([]byte, strLen)
