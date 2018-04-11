@@ -1,12 +1,16 @@
 package services
 
-import "math/rand"
+import (
+	"math/rand"
+	"time"
+)
 
 const strLen = 5
 
-// heavily inspired by this. Basically a no-nonsense approach
 func BuildRandomString() string {
 	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+	rand.Seed(time.Now().UnixNano() + 42)
 
 	b := make([]byte, strLen)
 
