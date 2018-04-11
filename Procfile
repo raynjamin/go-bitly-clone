@@ -1,1 +1,1 @@
-web: bitlyclone
+web: revel run bitlyclone

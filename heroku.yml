@@ -5,4 +5,4 @@ build:
     - go
 
 run:
-  web: bitlyclone
+  web: revel run bitlyclone
