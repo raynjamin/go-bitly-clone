@@ -54,7 +54,7 @@ func (c App) RandoPath(randopath string) revel.Result {
 	val, err := app.DB.Get(randopath).Result()
 
 	if err != nil {
-		c.Validation.Error("SHORTENED URL NOT FOUNDSIES")
+		c.Validation.Error("Invalid Shortened URL Specified")
 		c.Validation.Keep()
 		return c.Redirect("/")
 	}
@@ -62,6 +62,9 @@ func (c App) RandoPath(randopath string) revel.Result {
 	r := &models.Route{}
 
 	r.UnMarshalBinary([]byte(val))
+
+	// increment visitcount in a goroutine
+	go IncrementVisitCount(r)
 
 	return c.Redirect(r.OriginalUrl)
 }
@@ -78,4 +81,9 @@ func GetUniqueShortPath() string {
 	}
 
 	return shortUrl
+}
+
+func IncrementVisitCount(r *models.Route) {
+	r.VisitCount++
+	app.DB.Set(r.ShortPath, r, 0)
 }

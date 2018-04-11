@@ -7,6 +7,7 @@ import (
 type Route struct {
 	OriginalUrl string
 	ShortPath   string
+	VisitCount  int
 }
 
 func (r Route) MarshalBinary() ([]byte, error) {
